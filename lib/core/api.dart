@@ -68,7 +68,7 @@ class ApiClient {
             BaseOptions(
               baseUrl: const String.fromEnvironment(
                 'API_BASE_URL',
-                defaultValue: 'http://127.0.0.1:3001/api/v1',
+                defaultValue: 'https://api-bilcode-test.geats.web.id/api/v1',
               ),
               connectTimeout: const Duration(seconds: 15),
               receiveTimeout: const Duration(seconds: 35),

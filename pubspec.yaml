@@ -2,7 +2,7 @@ name: siklus
 description: "Siklus: laporan sampah dengan foto, lokasi, dan klasifikasi gambar."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ^3.13.7

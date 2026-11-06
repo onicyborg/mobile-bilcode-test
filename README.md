@@ -16,6 +16,10 @@ Aplikasi Flutter Android untuk laporan sampah, terhubung ke NestJS melalui `/api
 
 ## Menjalankan di HP melalui USB
 
+Secara default aplikasi memakai backend online `https://api-bilcode-test.geats.web.id/api/v1`. Setelah APK terpasang, aplikasi hanya memerlukan internet; USB dan server lokal tidak diperlukan. ML diakses melalui backend.
+
+Perintah di bawah khusus pengembangan dengan backend lokal:
+
 ```sh
 source ~/.config/siklus/mobile-env.sh
 cd /home/geats/Project/bilcode/mobile
@@ -33,6 +37,21 @@ flutter build apk --debug --target-platform android-arm64 --dart-define=API_BASE
 ```
 
 Hasil: `build/app/outputs/flutter-apk/app-debug.apk`.
+
+## APK dengan backend online
+
+```sh
+source ~/.config/siklus/mobile-env.sh
+cd /home/geats/Project/bilcode/mobile
+flutter pub get
+flutter build apk --release --dart-define-from-file=config/production.json
+```
+
+Hasil: `build/app/outputs/flutter-apk/app-release.apk` (versi 1.0.1+2, APK universal).
+
+Build release memakai keystore khusus melalui `android/key.properties`, mengikuti format signing Flutter: `storeFile`, `storePassword`, `keyAlias`, dan `keyPassword`. Keystore dan file properties bersifat lokal, diabaikan Git, dan harus dicadangkan agar pembaruan APK dapat memakai identitas signing yang sama. Tanpa konfigurasi ini, build release belum dapat ditandatangani. URL dalam `config/production.json` bersifat publik dan tidak berisi credential.
+
+Jika APK debug lama masih terpasang, Android menolak pembaruan langsung karena signing key berbeda. Hapus aplikasi debug terlebih dahulu sebelum memasang APK release; data lokal dan sesi login akan terhapus, sedangkan laporan di server tetap tersimpan.
 
 ## Struktur
 
